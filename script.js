@@ -141,14 +141,26 @@ searchInput.addEventListener(
 
 
 /* =========================
-   READ NOVEL BUTTON
+   READ NOVEL
 ========================= */
 
 const readButtons =
-    document.querySelectorAll(
-        ".read-btn"
-    );
+    document.querySelectorAll(".read-btn");
 
+readButtons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        const page =
+            button.getAttribute("data-page");
+
+        if (page) {
+            window.location.href = page;
+        }
+
+    });
+
+});
 /* =========================
    CHERRY BLOSSOM PARTICLES
 ========================= */
