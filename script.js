@@ -1,116 +1,352 @@
-/* =========================
+/* =========================================
    THEME
-========================= */
+========================================= */
 
-const themeBtn =
-    document.getElementById("themeBtn");
+const themeBtn = document.getElementById("themeBtn");
 
+if (themeBtn) {
+    themeBtn.addEventListener("click", () => {
 
-themeBtn.addEventListener(
-    "click",
-    () => {
+        document.body.classList.toggle("light");
 
-        document.body.classList.toggle(
-            "light"
-        );
-
-
-        if (
-            document.body.classList.contains(
-                "light"
-            )
-        ) {
-
+        if (document.body.classList.contains("light")) {
             themeBtn.textContent = "☀️";
-
-            localStorage.setItem(
-                "theme",
-                "light"
-            );
-
+            localStorage.setItem("theme", "light");
         } else {
-
             themeBtn.textContent = "🌙";
-
-            localStorage.setItem(
-                "theme",
-                "dark"
-            );
-
+            localStorage.setItem("theme", "dark");
         }
 
+    });
+
+    if (localStorage.getItem("theme") === "light") {
+        document.body.classList.add("light");
+        themeBtn.textContent = "☀️";
     }
-);
+}
 
 
-/* =========================
-   LOAD SAVED THEME
-========================= */
+/* =========================================
+   NOVEL SEARCH
+========================================= */
 
-if (
-    localStorage.getItem("theme")
-    === "light"
-) {
+const searchInput =
+    document.getElementById("searchInput");
 
-    document.body.classList.add("light");
+const novelCards =
+    document.querySelectorAll(".novel-card");
 
-    themeBtn.textContent = "☀️";
+const noResults =
+    document.getElementById("noResults");
+
+if (searchInput) {
+
+    searchInput.addEventListener("input", () => {
+
+        const searchText =
+            searchInput.value.toLowerCase().trim();
+
+        let found = false;
+
+        novelCards.forEach(card => {
+
+            const text =
+                card.textContent.toLowerCase();
+
+            if (text.includes(searchText)) {
+
+                card.style.display = "";
+                found = true;
+
+            } else {
+
+                card.style.display = "none";
+
+            }
+
+        });
+
+        if (noResults) {
+            noResults.style.display =
+                found ? "none" : "block";
+        }
+
+    });
 
 }
 
 
-/* =========================
+/* =========================================
+   OPEN NOVEL
+========================================= */
+
+const readButtons =
+    document.querySelectorAll(".read-btn");
+
+readButtons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        const page =
+            button.getAttribute("data-page");
+
+        if (page) {
+
+            window.location.href = page;
+
+        }
+
+    });
+
+});
+
+
+/* =========================================
+   CHERRY BLOSSOM
+========================================= */
+
+const blossomContainer =
+    document.getElementById("cherry-blossoms");
+
+if (blossomContainer) {
+
+    function createCherryBlossom() {
+
+        const petal =
+            document.createElement("span");
+
+        petal.classList.add("cherry-petal");
+
+        petal.style.left =
+            Math.random() * 100 + "vw";
+
+        const fallX =
+            (Math.random() - 0.5) * 400;
+
+        petal.style.setProperty(
+            "--fall-x",
+            fallX + "px"
+        );
+
+        const size =
+            Math.random() * 8 + 7;
+
+        petal.style.width =
+            size + "px";
+
+        petal.style.height =
+            size * 0.75 + "px";
+
+        const fallDuration =
+            Math.random() * 7 + 7;
+
+        const swayDuration =
+            Math.random() * 2 + 2;
+
+        petal.style.animationDuration =
+            fallDuration + "s, " +
+            swayDuration + "s";
+
+        petal.style.animationDelay =
+            Math.random() * 5 + "s";
+
+        blossomContainer.appendChild(petal);
+
+        setTimeout(() => {
+            petal.remove();
+        }, (fallDuration + 5) * 1000);
+
+    }
+
+    setInterval(
+        createCherryBlossom,
+        450
+    );
+
+    for (let i = 0; i < 12; i++) {
+
+        setTimeout(
+            createCherryBlossom,
+            i * 300
+        );
+
+    }
+
+}/* =========================================
+   THEME
+========================================= */
+
+const themeBtn = document.getElementById("themeBtn");
+
+if (themeBtn) {
+    themeBtn.addEventListener("click", () => {
+
+        document.body.classList.toggle("light");
+
+        if (document.body.classList.contains("light")) {
+            themeBtn.textContent = "☀️";
+            localStorage.setItem("theme", "light");
+        } else {
+            themeBtn.textContent = "🌙";
+            localStorage.setItem("theme", "dark");
+        }
+
+    });
+
+    if (localStorage.getItem("theme") === "light") {
+        document.body.classList.add("light");
+        themeBtn.textContent = "☀️";
+    }
+}
+
+
+/* =========================================
    NOVEL SEARCH
-========================= */
+========================================= */
 
 const searchInput =
-    document.getElementById(
-        "searchInput"
-    );
-
+    document.getElementById("searchInput");
 
 const novelCards =
-    document.querySelectorAll(
-        ".novel-card"
-    );
-
+    document.querySelectorAll(".novel-card");
 
 const noResults =
-    document.getElementById(
-        "noResults"
-    );
+    document.getElementById("noResults");
 
+if (searchInput) {
 
-searchInput.addEventListener(
-    "input",
-    () => {
+    searchInput.addEventListener("input", () => {
 
         const searchText =
-            searchInput.value
-                .toLowerCase()
-                .trim();
-
+            searchInput.value.toLowerCase().trim();
 
         let found = false;
 
+        novelCards.forEach(card => {
 
-        novelCards.forEach(
-            card => {
+            const text =
+                card.textContent.toLowerCase();
 
-                const cardText =
-                    card.textContent
-                        .toLowerCase();
+            if (text.includes(searchText)) {
+
+                card.style.display = "";
+                found = true;
+
+            } else {
+
+                card.style.display = "none";
+
+            }
+
+        });
+
+        if (noResults) {
+            noResults.style.display =
+                found ? "none" : "block";
+        }
+
+    });
+
+}
 
 
-                if (
-                    cardText.includes(
-                        searchText
-                    )
-                ) {
+/* =========================================
+   OPEN NOVEL
+========================================= */
 
-                    card.style.display =
-                        "";
+const readButtons =
+    document.querySelectorAll(".read-btn");
 
+readButtons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        const page =
+            button.getAttribute("data-page");
+
+        if (page) {
+
+            window.location.href = page;
+
+        }
+
+    });
+
+});
+
+
+/* =========================================
+   CHERRY BLOSSOM
+========================================= */
+
+const blossomContainer =
+    document.getElementById("cherry-blossoms");
+
+if (blossomContainer) {
+
+    function createCherryBlossom() {
+
+        const petal =
+            document.createElement("span");
+
+        petal.classList.add("cherry-petal");
+
+        petal.style.left =
+            Math.random() * 100 + "vw";
+
+        const fallX =
+            (Math.random() - 0.5) * 400;
+
+        petal.style.setProperty(
+            "--fall-x",
+            fallX + "px"
+        );
+
+        const size =
+            Math.random() * 8 + 7;
+
+        petal.style.width =
+            size + "px";
+
+        petal.style.height =
+            size * 0.75 + "px";
+
+        const fallDuration =
+            Math.random() * 7 + 7;
+
+        const swayDuration =
+            Math.random() * 2 + 2;
+
+        petal.style.animationDuration =
+            fallDuration + "s, " +
+            swayDuration + "s";
+
+        petal.style.animationDelay =
+            Math.random() * 5 + "s";
+
+        blossomContainer.appendChild(petal);
+
+        setTimeout(() => {
+            petal.remove();
+        }, (fallDuration + 5) * 1000);
+
+    }
+
+    setInterval(
+        createCherryBlossom,
+        450
+    );
+
+    for (let i = 0; i < 12; i++) {
+
+        setTimeout(
+            createCherryBlossom,
+            i * 300
+        );
+
+    }
+
+    }
                     found = true;
 
                 } else {
