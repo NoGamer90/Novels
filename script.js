@@ -1,116 +1,346 @@
-/* =========================================
+/* =========================
    THEME
-========================================= */
+========================= */
 
-const themeBtn = document.getElementById("themeBtn");
+const themeBtn =
+    document.getElementById("themeBtn");
 
-if (themeBtn) {
-    themeBtn.addEventListener("click", () => {
 
-        document.body.classList.toggle("light");
+themeBtn.addEventListener(
+    "click",
+    () => {
 
-        if (document.body.classList.contains("light")) {
+        document.body.classList.toggle(
+            "light"
+        );
+
+
+        if (
+            document.body.classList.contains(
+                "light"
+            )
+        ) {
+
             themeBtn.textContent = "☀️";
-            localStorage.setItem("theme", "light");
+
+            localStorage.setItem(
+                "theme",
+                "light"
+            );
+
         } else {
+
             themeBtn.textContent = "🌙";
-            localStorage.setItem("theme", "dark");
+
+            localStorage.setItem(
+                "theme",
+                "dark"
+            );
+
         }
 
-    });
-
-    if (localStorage.getItem("theme") === "light") {
-        document.body.classList.add("light");
-        themeBtn.textContent = "☀️";
     }
+);
+
+
+/* =========================
+   LOAD SAVED THEME
+========================= */
+
+if (
+    localStorage.getItem("theme")
+    === "light"
+) {
+
+    document.body.classList.add("light");
+
+    themeBtn.textContent = "☀️";
+
 }
 
 
-/* =========================================
+/* =========================
    NOVEL SEARCH
-========================================= */
+========================= */
 
 const searchInput =
-    document.getElementById("searchInput");
+    document.getElementById(
+        "searchInput"
+    );
+
 
 const novelCards =
-    document.querySelectorAll(".novel-card");
+    document.querySelectorAll(
+        ".novel-card"
+    );
+
 
 const noResults =
-    document.getElementById("noResults");
+    document.getElementById(
+        "noResults"
+    );
 
-if (searchInput) {
 
-    searchInput.addEventListener("input", () => {
+searchInput.addEventListener(
+    "input",
+    () => {
 
         const searchText =
-            searchInput.value.toLowerCase().trim();
+            searchInput.value
+                .toLowerCase()
+                .trim();
+
 
         let found = false;
 
-        novelCards.forEach(card => {
 
-            const text =
-                card.textContent.toLowerCase();
+        novelCards.forEach(
+            card => {
 
-            if (text.includes(searchText)) {
+                const cardText =
+                    card.textContent
+                        .toLowerCase();
 
-                card.style.display = "";
-                found = true;
 
-            } else {
+                if (
+                    cardText.includes(
+                        searchText
+                    )
+                ) {
 
-                card.style.display = "none";
+                    card.style.display =
+                        "";
+
+                    found = true;
+
+                } else {
+
+                    card.style.display =
+                        "none";
+
+                }
 
             }
+        );
 
-        });
 
-        if (noResults) {
+        if (found) {
+
             noResults.style.display =
-                found ? "none" : "block";
+                "none";
+
+        } else {
+
+            noResults.style.display =
+                "block";
+
         }
 
-    });
+    }
+);
+
+
+/* =========================
+   READ NOVEL BUTTON
+========================= */
+
+const readButtons =
+    document.querySelectorAll(
+        ".read-btn"
+    );
+
+
+readButtons.forEach(
+    button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                const novelName =
+                    button.dataset.novel;
+
+
+                alert(
+                    `"${novelName}" reader will be added soon! 📖`
+                );
+
+            }
+        );
+
+    }
+);card.textContent/* =========================
+   THEME
+========================= */
+
+const themeBtn =
+    document.getElementById("themeBtn");
+
+
+themeBtn.addEventListener(
+    "click",
+    () => {
+
+        document.body.classList.toggle(
+            "light"
+        );
+
+
+        if (
+            document.body.classList.contains(
+                "light"
+            )
+        ) {
+
+            themeBtn.textContent = "☀️";
+
+            localStorage.setItem(
+                "theme",
+                "light"
+            );
+
+        } else {
+
+            themeBtn.textContent = "🌙";
+
+            localStorage.setItem(
+                "theme",
+                "dark"
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================
+   LOAD SAVED THEME
+========================= */
+
+if (
+    localStorage.getItem("theme")
+    === "light"
+) {
+
+    document.body.classList.add("light");
+
+    themeBtn.textContent = "☀️";
 
 }
 
 
-/* =========================================
-   OPEN NOVEL
-========================================= */
+/* =========================
+   NOVEL SEARCH
+========================= */
 
-const readButtons =
-    document.querySelectorAll(".read-btn");
+const searchInput =
+    document.getElementById(
+        "searchInput"
+    );
 
-readButtons.forEach(button => {
 
-    button.addEventListener("click", () => {
+const novelCards =
+    document.querySelectorAll(
+        ".novel-card"
+    );
 
-        const page =
-            button.getAttribute("data-page");
 
-        if (page) {
+const noResults =
+    document.getElementById(
+        "noResults"
+    );
 
-            window.location.href = page;
+
+searchInput.addEventListener(
+    "input",
+    () => {
+
+        const searchText =
+            searchInput.value
+                .toLowerCase()
+                .trim();
+
+
+        let found = false;
+
+
+        novelCards.forEach(
+            card => {
+
+                const cardText =
+                    card.textContent
+                        .toLowerCase();
+
+
+                if (
+                    cardText.includes(
+                        searchText
+                    )
+                ) {
+
+                    card.style.display =
+                        "";
+
+                    found = true;
+
+                } else {
+
+                    card.style.display =
+                        "none";
+
+                }
+
+            }
+        );
+
+
+        if (found) {
+
+            noResults.style.display =
+                "none";
+
+        } else {
+
+            noResults.style.display =
+                "block";
 
         }
 
-    });
+    }
+);
 
-});
+
+/* =========================
+   READ NOVEL BUTTON
+========================= */
+
+const readButtons =
+    document.querySelectorAll(
+        ".read-btn"
+    );
 
 
-/* =========================================
-   CHERRY BLOSSOM
-========================================= */
+readButtons.forEach(
+    button => {
 
-const blossomContainer =
-    document.getElementById("cherry-blossoms");
+        button.addEventListener(
+            "click",
+            () => {
 
-if (blossomContainer) {
+                const novelName =
+                    button.dataset.novel;
 
-    function createCherryBlossom() {
+
+                alert(
+                    `"${novelName}" reader will be added soon! 📖`
+                );
+
+            }
+        );
+
+    }
+);    function createCherryBlossom() {
 
         const petal =
             document.createElement("span");
@@ -336,17 +566,119 @@ if (blossomContainer) {
         createCherryBlossom,
         450
     );
+/* =========================
+   THEME
+========================= */
 
-    for (let i = 0; i < 12; i++) {
+const themeBtn =
+    document.getElementById("themeBtn");
 
-        setTimeout(
-            createCherryBlossom,
-            i * 300
+
+themeBtn.addEventListener(
+    "click",
+    () => {
+
+        document.body.classList.toggle(
+            "light"
         );
 
-    }
+
+        if (
+            document.body.classList.contains(
+                "light"
+            )
+        ) {
+
+            themeBtn.textContent = "☀️";
+
+            localStorage.setItem(
+                "theme",
+                "light"
+            );
+
+        } else {
+
+            themeBtn.textContent = "🌙";
+
+            localStorage.setItem(
+                "theme",
+                "dark"
+            );
+
+        }
 
     }
+);
+
+
+/* =========================
+   LOAD SAVED THEME
+========================= */
+
+if (
+    localStorage.getItem("theme")
+    === "light"
+) {
+
+    document.body.classList.add("light");
+
+    themeBtn.textContent = "☀️";
+
+}
+
+
+/* =========================
+   NOVEL SEARCH
+========================= */
+
+const searchInput =
+    document.getElementById(
+        "searchInput"
+    );
+
+
+const novelCards =
+    document.querySelectorAll(
+        ".novel-card"
+    );
+
+
+const noResults =
+    document.getElementById(
+        "noResults"
+    );
+
+
+searchInput.addEventListener(
+    "input",
+    () => {
+
+        const searchText =
+            searchInput.value
+                .toLowerCase()
+                .trim();
+
+
+        let found = false;
+
+
+        novelCards.forEach(
+            card => {
+
+                const cardText =
+                    card.textContent
+                        .toLowerCase();
+
+
+                if (
+                    cardText.includes(
+                        searchText
+                    )
+                ) {
+
+                    card.style.display =
+                        "";
+
                     found = true;
 
                 } else {
@@ -375,28 +707,6 @@ if (blossomContainer) {
     }
 );
 
-
-/* =========================
-   READ NOVEL
-========================= */
-
-const readButtons =
-    document.querySelectorAll(".read-btn");
-
-readButtons.forEach(button => {
-
-    button.addEventListener("click", () => {
-
-        const page =
-            button.getAttribute("data-page");
-
-        if (page) {
-            window.location.href = page;
-        }
-
-    });
-
-});
 /* =========================
    CHERRY BLOSSOM PARTICLES
 ========================= */
@@ -516,7 +826,16 @@ for (
         i * 300
     );
 
-}
+         }
+/* =========================
+   READ NOVEL BUTTON
+========================= */
+
+const readButtons =
+    document.querySelectorAll(
+        ".read-btn"
+    );
+
 
 readButtons.forEach(
     button => {
